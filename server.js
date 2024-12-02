@@ -1,8 +1,13 @@
-const express = require('express')
+import express from "express"
+import { getHOME, patchHOME, postHOME, } from "./controllers/home.js"
+import {getToDo, createToDo} from "./controllers/todo.js"
 const app = express()
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
 
-app.listen(3000)
+app.route("/").get(getHOME).post(postHOME).patch(patchHOME);
+
+app.route("/todo").get(getToDo).post(createToDo);
+
+app.listen(3200, () => {
+    console.log("server is running on http://localhost:3200")
+}) 
